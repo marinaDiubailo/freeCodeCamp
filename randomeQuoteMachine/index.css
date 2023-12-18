@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
+* {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: rgb(201, 201, 73);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#quote-box {
+    width: 600px;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 20%);
+    background: rgb(173, 173, 31);
+}
+
+#text {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+#text > span {
+    font-size: 40px;
+}
+
+.actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#tweet-quote,
+#new-quote {
+    height: 38px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: rgb(201, 201, 73);
+    outline: none;
+    font-size: 20px;
+    padding: 8px 18px 6px 18px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#tweet-quote > i {
+    font-size: 28px;
+}
