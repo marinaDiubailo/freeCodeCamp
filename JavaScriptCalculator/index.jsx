@@ -35,31 +35,133 @@ import ReactDOM from 'https://cdn.skypack.dev/react-dom@17.0.1';
 const App = () => {
     const [calc, setCalc] = useState('');
     const [result, setResult] = useState('');
+    const opsMinusPoint = ['/', '*', '+', MINUS];
+
+    // const updateCalc = (value) => {
+    //     /********************************************/
+    //     if (!calc) {
+    //         if (ops.includes(value)) return;
+
+    //         if (value === POINT) {
+    //             setCalc('0' + value);
+    //             setResult('0' + value);
+    //             return;
+    //         }
+    //         if (value === MINUS || digits.includes(value)) {
+    //             setCalc(value);
+    //             setResult(value);
+    //             return;
+    //         }
+    //     }
+
+    //     if (calc === '0' && !operators.includes(value)) {
+    //         return;
+    //     }
+
+    //     if (calc && calc.includes('=')) {
+    //         if (digits.includes(value)) {
+    //             setCalc(value);
+    //             setResult(value);
+    //             return;
+    //         }
+    //         if (value === POINT) {
+    //             setCalc('0' + value);
+    //             setResult('0' + value);
+    //             return;
+    //         }
+
+    //         if (opsMinusPoint.includes(value)) {
+    //             setCalc(result.concat(value));
+    //             setResult(value);
+    //             return;
+    //         }
+    //     }
+
+    //     /**********************************************/
+    //     if (
+    //         operators.includes(value) &&
+    //         operators.includes(calc.slice(-1)) &&
+    //         value !== MINUS
+    //     ) {
+    //         const res = calc.slice(0, -1);
+    //         setCalc(res.concat(value));
+    //         setResult(value);
+    //         return;
+    //     } else if (
+    //         operators.includes(value) &&
+    //         operators.includes(calc.slice(-1)) &&
+    //         operators.includes(calc.slice(-2, -1))
+    //     ) {
+    //         const res = calc.slice(0, -2);
+    //         setCalc(res.concat(value));
+    //         setResult(value);
+    //         return;
+    //     }
+
+    //     setCalc(calc.concat(value));
+    // };
 
     const updateCalc = (value) => {
-        if (operators.includes(value) && operators.includes(calc.slice(-1))) {
-            return;
-        }
-
-        setCalc(calc + value);
-
-        if (!operators.includes(value)) {
-            setResult(eval(calc + value).toString());
+        if (value === NEGATIVE) {
+            if (result === '') return;
+            setResult(
+                result.toString().charAt(0) === MINUS
+                    ? result.slice(1)
+                    : MINUS + result,
+            );
+        } else if (opsMinusPoint.includes(value)) {
+            setCalc(trimmed + ' ' + value + ' ');
+        } else if (value === '0') {
+            if (calc.charAt(0) !== '0') {
+                setCalc(calc + value);
+            }
+        } else if (value === POINT) {
+            const lastNumber = calc.split(/[-+*/]/g).pop();
+            if (!lastNumber) return;
+            if (lastNumber.includes(POINT)) return;
+            setCalc(calc + value);
+        } else {
+            if (calc.charAt(0) === '0') {
+                setCalc(calc.slice(1) + value);
+            } else {
+                setCalc(calc + value);
+            }
         }
     };
+
     const calculate = () => {
-        setCalc(eval(calc).toString());
-    };
-    const deleteLast = () => {
-        if (!calc) return;
-
-        const value = calc.slice(0, -1);
-        setCalc(value);
-    };
-    const clear = () => {
-        if (!calc) return;
+        if (opsMinusPoint.includes(trimmed.charAt(trimmed.length - 1))) return;
+        const parts = trimmed.split(' ');
+        const newParts = [];
+        for (let i = parts.length - 1; i >= 0; i--) {
+            if (
+                opsMinus.includes(parts[i]) &&
+                opsMinusPoint.includes(parts[i - 1])
+            ) {
+                newParts.unshift(parts[i]);
+                let j = 0;
+                let k = i - 1;
+                while (opsMinusPoint.includes(parts[k])) {
+                    k--;
+                    j++;
+                }
+                i -= j;
+            } else {
+                newParts.unshift(parts[i]);
+            }
+        }
+        const newCalc = newParts.join(' ');
+        if (opsMinusPoint.includes(newCalc.charAt(0))) {
+            setResult(eval(result + newCalc));
+        } else {
+            setResult(eval(newCalc));
+        }
         setCalc('');
-        setResult('');
+    };
+
+    const clear = () => {
+        setCalc('');
+        setResult('0');
     };
 
     return (

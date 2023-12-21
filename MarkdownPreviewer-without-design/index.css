@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.App {
+    background: olive;
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 16px;
+}
+
+#editor {
+    background: #ccc;
+    width: 700px;
+    height: 300px;
+}
+#preview {
+    background: yellow;
+    max-width: 600px;
+    overflow: auto;
+}
