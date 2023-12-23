@@ -1,0 +1,67 @@
+:root {
+    --primary: #1e755b;
+    --secondary: #8c38ff;
+    --dark: #131a26;
+    --light: rgb(204, 204, 204);
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+body {
+    background: var(--primary);
+    width: 100%;
+    min-height: 100vh;
+}
+
+button {
+    background: inherit;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+span {
+    font-size: 24px;
+}
+
+h1 {
+    font-family: 'Sevillana', serif;
+    font-size: 5rem;
+    margin-bottom: 20px;
+    color: #aac8fa;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.break-session-container {
+    display: flex;
+}
+
+i {
+    color: white;
+    font-size: 24px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.arrows {
+    display: flex;
+    gap: 10px;
+}
