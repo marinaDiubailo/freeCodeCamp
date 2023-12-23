@@ -21,11 +21,17 @@ const App = () => {
                     <h2 id="break-label">Break Length</h2>
                     <div className="arrows">
                         <button id="break-decrement">
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            <i
+                                class="fa fa-2x fa-arrow-down"
+                                aria-hidden="true"
+                            ></i>
                         </button>
                         <span id="break-length">{breakLength}</span>
                         <button id="break-increment">
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <i
+                                class="fa fa-2x fa-arrow-up"
+                                aria-hidden="true"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -33,11 +39,17 @@ const App = () => {
                     <h2 id="session-label">Session Length</h2>
                     <div className="arrows">
                         <button id="session-decrement">
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            <i
+                                class="fa fa-2x fa-arrow-down"
+                                aria-hidden="true"
+                            ></i>
                         </button>
                         <span id="session-length">{sessionLength}</span>
                         <button id="session-increment">
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <i
+                                class="fa fa-2x fa-arrow-up"
+                                aria-hidden="true"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -45,18 +57,18 @@ const App = () => {
 
             <div className="session-container">
                 <h2 id="timer-label">Session</h2>
-                <h1 id="time-left">25:00</h1>
+                <div id="time-left">25:00</div>
             </div>
 
             <div className="buttons-container">
                 <button id="start_stop">
-                    <i class="fa fa-play" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-play" aria-hidden="true"></i>
                 </button>
                 <button>
-                    <i class="fa fa-pause" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-pause" aria-hidden="true"></i>
                 </button>
                 <button id="reset" onClick={resetHandler}>
-                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-refresh" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
