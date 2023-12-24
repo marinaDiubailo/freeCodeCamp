@@ -4,34 +4,85 @@ import React, {
 } from 'https://cdn.skypack.dev/react@17.0.1';
 import ReactDOM from 'https://cdn.skypack.dev/react-dom@17.0.1';
 
-const breakLength = 5 * 60;
-const sessionLength = 25 * 60;
-
 const App = () => {
-    const [breakView, setBreakView] = useState(breakLength / 60);
-    const [sessionView, setSessionView] = useState(sessionLength / 60);
+    const initialBreakTime = 5 * 60;
+    const initialSessionTime = 25 * 60;
+
+    const [timer, setTimer] = useState(initialSessionTime);
+    const [breakView, setBreakView] = useState(initialBreakTime);
+    const [sessionView, setSessionView] = useState(initialSessionTime);
+    const [isSession, setIsSession] = useState(false);
+    const [isBreak, setIsBreak] = useState(false);
+
+    const formatTime = (time) => {
+        let minutes = Math.floor(time / 60);
+        let siconds = time % 60;
+        return (
+            (minutes < 10 ? '0' + minutes : minutes) +
+            ':' +
+            (siconds < 10 ? '0' + siconds : siconds)
+        );
+    };
+
+    const changeTime = (amount, type) => {
+        if (type === 'break') {
+            if (breakView + amount >= 60 && breakView + amount <= 3600) {
+                setBreakView(breakView + amount);
+            }
+        } else {
+            if (sessionView + amount >= 60 && sessionView + amount <= 3600) {
+                setSessionView(sessionView + amount);
+                if (!isSession) {
+                    setTimer(sessionView + amount);
+                }
+            }
+        }
+    };
 
     const resetHandler = () => {
-        setBreaklength(5);
-        setSessionlength(25);
+        const audio = document.getElementById('beep');
+        audio.pause();
+        audio.currentTime = 0;
+
+        setBreakView(initialBreakTime);
+        setSessionView(initialSessionTime);
+        setTimer(initialSessionTime);
+        setIsSession(false);
+        setIsBreak(false);
     };
 
-    const breakDecrementHandler = () => {
-        if (breakView === 1) return;
-        setBreakView((prev) => prev - 1);
+    const controlTimeHandler = () => {
+        setIsSession(!isSession);
     };
-    const breakIncrementHandler = () => {
-        if (breakView === 60) return;
-        setBreakView((prev) => prev + 1);
-    };
-    const sessionDecrementHandler = () => {
-        if (sessionView === 1) return;
-        setSessionView((prev) => prev - 1);
-    };
-    const sessionIncrementHandler = () => {
-        if (sessionView === 60) return;
-        setSessionView((prev) => prev + 1);
-    };
+
+    useEffect(() => {
+        let countdown;
+
+        if (isSession) {
+            countdown = setInterval(() => {
+                setTimer((prev) => {
+                    if (prev > 0) {
+                        return prev - 1;
+                    } else {
+                        setIsBreak(!isBreak);
+                        return isBreak ? sessionView : breakView;
+                    }
+                });
+            }, 1000);
+        } else {
+            clearInterval(countdown);
+        }
+
+        if (timer === 0) {
+            const audio = document.getElementById('beep');
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        return () => {
+            clearInterval(countdown);
+        };
+    }, [isSession, isBreak, sessionView, breakView, timer]);
 
     return (
         <div className="App">
@@ -42,17 +93,17 @@ const App = () => {
                     <div className="arrows">
                         <button
                             id="break-decrement"
-                            onClick={breakDecrementHandler}
+                            onClick={() => changeTime(-60, 'break')}
                         >
                             <i
                                 class="fa fa-2x fa-arrow-down"
                                 aria-hidden="true"
                             ></i>
                         </button>
-                        <span id="break-length">{breakView}</span>
+                        <span id="break-length">{breakView / 60}</span>
                         <button
                             id="break-increment"
-                            onClick={breakIncrementHandler}
+                            onClick={() => changeTime(-60, 'break')}
                         >
                             <i
                                 class="fa fa-2x fa-arrow-up"
@@ -66,17 +117,17 @@ const App = () => {
                     <div className="arrows">
                         <button
                             id="session-decrement"
-                            onClick={sessionDecrementHandler}
+                            onClick={() => changeTime(-60, 'session')}
                         >
                             <i
                                 class="fa fa-2x fa-arrow-down"
                                 aria-hidden="true"
                             ></i>
                         </button>
-                        <span id="session-length">{sessionView}</span>
+                        <span id="session-length">{sessionView / 60}</span>
                         <button
                             id="session-increment"
-                            onClick={sessionIncrementHandler}
+                            onClick={() => changeTime(60, 'session')}
                         >
                             <i
                                 class="fa fa-2x fa-arrow-up"
@@ -88,21 +139,27 @@ const App = () => {
             </div>
 
             <div className="session-container">
-                <h2 id="timer-label">Session</h2>
-                <div id="time-left">25:00</div>
+                <h2 id="timer-label">{isBreak ? 'Break' : 'Session'}</h2>
+                <div id="time-left">{formatTime(timer)}</div>
             </div>
 
             <div className="buttons-container">
-                <button id="start_stop">
-                    <i class="fa fa-2x fa-play" aria-hidden="true"></i>
+                <button id="start_stop" onClick={controlTimeHandler}>
+                    {isSession ? (
+                        <i class="fa fa-2x fa-pause" aria-hidden="true"></i>
+                    ) : (
+                        <i class="fa fa-2x fa-play" aria-hidden="true"></i>
+                    )}
                 </button>
-                <button>
-                    <i class="fa fa-2x fa-pause" aria-hidden="true"></i>
-                </button>
+
                 <button id="reset" onClick={resetHandler}>
                     <i class="fa fa-2x fa-refresh" aria-hidden="true"></i>
                 </button>
             </div>
+            <audio
+                id="beep"
+                src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+            />
         </div>
     );
 };
