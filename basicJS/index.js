@@ -170,13 +170,13 @@ const myAdverb = 'quickly';
 
 // Only change code below this line
 const wordBlanks =
-    'A ' + myAdjective + ' ' + myNoun + ' ' + myVerb + ' ' + myAdverb + '!';
+  'A ' + myAdjective + ' ' + myNoun + ' ' + myVerb + ' ' + myAdverb + '!';
 
 const myArray = ['My String', 10];
 
 const myArray2 = [
-    [10, 15],
-    [20, 30],
+  [10, 15],
+  [20, 30],
 ];
 
 const myArray3 = [50, 60, 70];
@@ -187,36 +187,36 @@ const myArray4 = [18, 64, 99];
 myArray4[0] = 45;
 
 const myArray5 = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [[10, 11, 12], 13, 14],
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [[10, 11, 12], 13, 14],
 ];
 
 const myData2 = myArray5[2][1];
 
 const myArray6 = [
-    ['John', 23],
-    ['cat', 2],
+  ['John', 23],
+  ['cat', 2],
 ];
 myArray6.push(['dog', 3]);
 
 // Setup
 const myArray7 = [
-    ['John', 23],
-    ['cat', 2],
+  ['John', 23],
+  ['cat', 2],
 ];
 const removedFromMyArray = myArray7.pop();
 
 const myArray8 = [
-    ['John', 23],
-    ['dog', 3],
+  ['John', 23],
+  ['dog', 3],
 ];
 const removedFromMyArray2 = myArray8.shift();
 
 const myArray9 = [
-    ['John', 23],
-    ['dog', 3],
+  ['John', 23],
+  ['dog', 3],
 ];
 myArray9.shift();
 myArray9.unshift(['Paul', 35]);
@@ -229,44 +229,44 @@ myList.push(['Banana Bar', 15]);
 myList.push(['Banana Waffles', 13]);
 
 function reusableFunction() {
-    console.log('Hi World');
+  console.log('Hi World');
 }
 reusableFunction();
 
 function functionWithArgs(a, b) {
-    console.log(a + b);
+  console.log(a + b);
 }
 functionWithArgs(10, 20);
 
 function timesFive(num) {
-    return num * 5;
+  return num * 5;
 }
 
 // Declare the myGlobal variable below this line
 const myGlobal = 10;
 
 function fun1() {
-    // Assign 5 to oopsGlobal here
-    oopsGlobal = 5;
+  // Assign 5 to oopsGlobal here
+  oopsGlobal = 5;
 }
 
 // Only change code above this line
 
 function fun2() {
-    let output = '';
-    if (typeof myGlobal != 'undefined') {
-        output += 'myGlobal: ' + myGlobal;
-    }
-    if (typeof oopsGlobal != 'undefined') {
-        output += ' oopsGlobal: ' + oopsGlobal;
-    }
-    console.log(output);
+  let output = '';
+  if (typeof myGlobal != 'undefined') {
+    output += 'myGlobal: ' + myGlobal;
+  }
+  if (typeof oopsGlobal != 'undefined') {
+    output += ' oopsGlobal: ' + oopsGlobal;
+  }
+  console.log(output);
 }
 
 function myLocalScope() {
-    // Only change code below this line
-    let myVar = 'Foo';
-    console.log('inside myLocalScope', myVar);
+  // Only change code below this line
+  let myVar = 'Foo';
+  console.log('inside myLocalScope', myVar);
 }
 myLocalScope();
 
@@ -278,10 +278,10 @@ console.log('outside myLocalScope', myVar);
 const outerWear = 'T-Shirt';
 
 function myOutfit() {
-    // Only change code below this line
-    const outerWear = 'sweater';
-    // Only change code above this line
-    return outerWear;
+  // Only change code below this line
+  const outerWear = 'sweater';
+  // Only change code above this line
+  return outerWear;
 }
 
 myOutfit();
@@ -290,12 +290,12 @@ myOutfit();
 let sum1 = 0;
 
 function addThree() {
-    sum1 = sum1 + 3;
+  sum1 = sum1 + 3;
 }
 
 // Only change code below this line
 function addFive() {
-    sum1 = sum1 + 5;
+  sum1 = sum1 + 5;
 }
 // Only change code above this line
 
@@ -306,22 +306,87 @@ addFive();
 let processed = 0;
 
 function processArg(num) {
-    return (num + 3) / 5;
+  return (num + 3) / 5;
 }
 processed = processArg(7);
 
 function nextInLine(arr, item) {
-    // Only change code below this line
-    arr.push(item);
-    item = arr.shift();
-    return item;
-    // Only change code above this line
+  // Only change code below this line
+  arr.push(item);
+  item = arr.shift();
+  return item;
+  // Only change code above this line
 }
 
 function welcomeToBooleans() {
-    // Only change code below this line
+  // Only change code below this line
 
-    return true; // Change this line
+  return true; // Change this line
 
-    // Only change code above this line
+  // Only change code above this line
 }
+
+function trueOrFalse(wasThatTrue) {
+  // Only change code below this line
+  if (wasThatTrue) {
+    return 'Yes, that was true';
+  }
+  return 'No, that was false';
+
+  // Only change code above this line
+}
+
+// Setup
+function testEqual(val) {
+  if (val == 12) {
+    // Change this line
+    return 'Equal';
+  }
+  return 'Not Equal';
+}
+
+testEqual(10);
+
+// Setup
+function testStrict(val) {
+  if (val === 7) {
+    // Change this line
+    return 'Equal';
+  }
+  return 'Not Equal';
+}
+
+testStrict(10);
+
+// Setup
+function compareEquality(a, b) {
+  if (a === b) {
+    // Change this line
+    return 'Equal';
+  }
+  return 'Not Equal';
+}
+
+compareEquality(10, '10');
+
+// Setup
+function testNotEqual(val) {
+  if (val != 99) {
+    // Change this line
+    return 'Not Equal';
+  }
+  return 'Equal';
+}
+
+testNotEqual(10);
+
+// Setup
+function testStrictNotEqual(val) {
+  if (val !== 17) {
+    // Change this line
+    return 'Not Equal';
+  }
+  return 'Equal';
+}
+
+testStrictNotEqual(10);
